@@ -1,5 +1,22 @@
 body{
-    margin: 0;    
+    background-color:aliceblue;
+    margin: 0;
+}
+
+a{
+    text-decoration:none;
+    font-family:arial;
+    color:dimgrey;
+}
+
+h1{
+    font-family:arial;
+    color:dimgrey;
+}
+
+p{
+    font-family:arial;
+    color:dimgrey;
 }
 
 #container{
@@ -9,8 +26,15 @@ body{
 
 header{
     height:55px;
-    background-color:lightsteelblue;
     width:100%;
+    margin: 0 auto;
+    border-bottom:solid 1px lightgrey;
+    background-color:white;
+}
+
+#header_container{
+    margin: 0 auto;
+    width: 80%;
 }
 
 header img{
@@ -29,13 +53,14 @@ header img{
 
 #header_right input{
     border-radius:8px;
+    text-align:center;
 }
 
 main{
     margin: 0 auto;
     min-height: 400px; 
-    width:80%;
-    background-color:bisque;
+    width:65%;
+    background-color:white;
 }
 
 main h1, input{

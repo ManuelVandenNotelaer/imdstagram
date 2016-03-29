@@ -1,0 +1,44 @@
+body{
+    margin: 0;    
+}
+
+#container{
+    display:flex;
+    flex-flow: row wrap;
+}
+
+header{
+    height:55px;
+    background-color:lightsteelblue;
+    width:100%;
+}
+
+header img{
+    width:120px; 
+    padding-left:20px;
+}
+
+#header_right{
+    float:right;
+}
+
+#header_right input,a{
+    margin-top:20px; 
+    margin-right:20px;
+}
+
+#header_right input{
+    border-radius:8px;
+}
+
+main{
+    margin: 0 auto;
+    min-height: 400px; 
+    width:80%;
+    background-color:bisque;
+}
+
+main h1, input{
+    margin-left:20px; 
+    margin-top:20px;
+}

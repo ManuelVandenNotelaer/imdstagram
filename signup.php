@@ -1,8 +1,10 @@
 <?php
 
+    session_start();
+
 if(!empty($_POST)){
 if(!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['fullname']) && !empty($_POST['password'])){
-        $conn = new mysqli("localhost", "root", "root", "imdstagram");
+        $conn = new mysqli("localhost", "root", "", "imdstagram");
         
         $email = $_POST['email'];
         

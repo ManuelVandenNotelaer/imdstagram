@@ -1,43 +1,45 @@
 <?php
 
     session_start();
+    include_once("classes/user.class.php");
+    include_once("classes/db.class.php");
 
-function canLogin($p_email, $p_password ){
-
-        
-        $conn = new mysqli("localhost", "root", "", "imdstagram");
-        $query = " SELECT * FROM user 
-                    WHERE email = '".$conn->real_escape_string($p_email)."'";
-        
-        $result = $conn->query($query);
-        if($result->num_rows == 1){
-            $user = $result->fetch_assoc(); 
-            if(password_verify( $p_password, $user['password'])){
-                return true;   
-            }
-            else{
-                return false;   
-            }
-        }
-        else{
-            return false;   
-        }
-
-
-   }
 
    if( !empty( $_POST ) ){
        $email = $_POST['email'];
        $password = $_POST['password'];
-       if( canLogin( $email, $password ) ){
+       $g = new User();
+       if($g->canLogin( $email, $password ) ){
            $success = "Login succeeded, welcome!";
            
            $_SESSION['logged_in']=true;
-           $_SESSION['username']=$email;
+           $_SESSION['email']=$email;
+
+                      
+            //SELECT USERNAME IPV EMAIL(van in SESSION) voor in de newsfeed bij posts
+           /* $select2 = "SELECT username FROM user WHERE email='$email'";
+            $sel_username = $conn->query($select2);   
+            $fetch_sel_username=$sel_username->fetch();*/
+            
+    
+            //$select3 = "SELECT id FROM user WHERE email='$email'";
+            //$sel_id = $conn->query($select3);   
+            //$fetch_sel_id=$sel_id->fetch();
+           
+           $_SESSION['username']=$g->selectUsername($email);
+           $_SESSION['id']=$g->selectId($email);
+           //$_SESSION['id']=
+               //$statement3 = $conn->prepare("SELECT username FROM user WHERE username='$email'");
+               //$_SESSION['username'] = $statement3->setFetchMode(PDO::FETCH_ASSOC);
+               //echo $statement3;
+               //$_SESSION['username'] = "jow"'
+           echo "jow" . $_SESSION['username'];
+           header('Location: newsfeed.php');
+           $_SESSION['success'] = "logged in succesfully";
            
        }
        else{
-           $error =  "Woops, cannot login.";
+           $error =  "Can not login!";
        }
    }
 
@@ -52,22 +54,20 @@ function canLogin($p_email, $p_password ){
     <div id="container">
         <?php include_once('header.php'); ?>
         <main>
-           <h1>Log in!</h1>
-            <?php if(isset($success)){
-                echo "<p class='message'>$success</p>";
-            }  
-          ?>
-            <?php if(isset($error)){
-                echo "<p class='error'>$error</p>";
-            }?>
-            <form method="POST">
-                <input type="text" placeholder="email" id="email" name="email"><br>
-                <input type="password" placeholder="password" id="password" name="password"><br>
+           
+
+
+            <form action="" method="POST" id="login_form">
+                <h1>Log in!</h1>
+                <input type="text" placeholder="email" id="email" name="email"><br><br>
+
+                <input type="password" placeholder="password" id="password" name="password"><br><br>
                 
-                <input type="submit">
+                <input type="submit" ><br><br>
+                <a href="signup.php">Haven't got an account yet? <b>Sign Up!</b></a>
             </form>
         
-            <a href="signup.php">Signup</a>
+            
             
         </main>
         <footer></footer>
